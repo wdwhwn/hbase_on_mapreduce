@@ -25,9 +25,11 @@ public class MyMapper extends TableMapper<Text, IntWritable> {
      */
     @Override
     protected void map(ImmutableBytesWritable key, Result value, Context context) throws IOException, InterruptedException {
+        System.out.println(key);
         byte[] bytes = value.getValue("cf1".getBytes(), "age".getBytes());
         if(bytes != null && bytes.length != 0){
             int age = Bytes.toInt(bytes);
+//            输出  key为age，value为 18
             context.write(new Text("age"),new IntWritable(age));
         }
     }

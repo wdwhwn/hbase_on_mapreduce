@@ -27,14 +27,14 @@ public class RunMRJob {
         job.setOutputFormatClass(TableOutputFormat.class);
 
         //3. 初始化map的输入数据和reduce的计算输出
-        TableMapReduceUtil.initTableMapperJob("zpark:t_user",
+        TableMapReduceUtil.initTableMapperJob("spark1:t_user",
                 new Scan(),
                 MyMapper.class,
                 Text.class,
                 IntWritable.class,
                 job);
 
-        TableMapReduceUtil.initTableReducerJob("zpark:result",MyReducer.class,job);
+        TableMapReduceUtil.initTableReducerJob("spark1:result",MyReducer.class,job);
 
         //4. 提交运行mr程序
         job.waitForCompletion(true);

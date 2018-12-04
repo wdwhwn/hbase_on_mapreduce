@@ -13,8 +13,8 @@ public class MyReducer extends TableReducer<Text, IntWritable, NullWritable> { /
 
     /**
      *
-     * @param key  age
-     * @param values  [1,2,3,4,5.....999]
+     * @param key  输入的key  age
+     * @param values  输入的value  [1,2,3,4,5.....999]
      * @param context
      * @throws IOException
      * @throws InterruptedException
@@ -30,7 +30,9 @@ public class MyReducer extends TableReducer<Text, IntWritable, NullWritable> { /
 
         double avg = sum / count;
         // reduce计算结果输出到 HBase
+//          rowkey
         Put put = new Put("age".getBytes());
+//        在rowkey为age 的列簇cf1下添加avg字段
         put.addColumn("cf1".getBytes(),"avg".getBytes(), Bytes.toBytes(avg));
 
         context.write(null,put);
